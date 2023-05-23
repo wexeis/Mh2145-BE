@@ -139,10 +139,11 @@ if(passwordCompare === false){
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
+    console.log(token)
 
     return res.status(201).json({
       token,
-    });
+    } );
 
   
 } catch (error) {
