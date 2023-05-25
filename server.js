@@ -54,7 +54,6 @@ dotenv.config()
 const port = process.env.PORT || 8000;
 
 
-db()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
@@ -63,8 +62,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: '*'
 }));
-
-app.listen(port, ()=>{
+ db()
+ app.listen(port, ()=>{
     console.log("we are listening on port: " + port)})
 
 app.get('/', (req, res) => {
