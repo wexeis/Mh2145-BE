@@ -28,15 +28,7 @@ const cartSchema = new mongoose.Schema({
       productImage: {
         type: String,
       },
-    
-      sale:{
-        type: Number,
-      },
-    
-      productPrice: {
-        type: Number,
-      },
-    
+     
       finalPrice:{
         type: Number,
         required: true
