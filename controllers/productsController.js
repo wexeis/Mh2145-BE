@@ -53,6 +53,7 @@ export const findAProductByCategory = async(req, res) =>{
 
 export const createProduct = async (req, res) => {
     console.log(req.body);
+    console.log(req.file)
     try {
       const {
         productName,
@@ -66,7 +67,8 @@ export const createProduct = async (req, res) => {
       } = req.body;
   
       const finalPrice = productPrice - productPrice * sale;
-  
+      console.log(finalPrice)
+
       if (
         !productName ||
         !req.file ||
@@ -82,20 +84,19 @@ export const createProduct = async (req, res) => {
   
       const file = req.file;
       const uploadResult = await uploadToCloudinary(file);
-  console.log(uploadResult)
       const product = await new Product({
         productName,
         dosage,
-        productImage: uploadResult.secure_url, // Use the secure URL from Cloudinary
+        productImage: uploadResult.secure_url, 
         productDescription,
         productQuantity,
         sale,
         productPrice,
-        finalPrice,
+        finalPrice: finalPrice,
         categoryId,
         perscription,
       });
-  
+
       await product.save(); // Wait for the product to be saved to the database
   
       return res.status(201).json(product);

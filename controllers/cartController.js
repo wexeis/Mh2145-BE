@@ -18,16 +18,17 @@ export const AllCarts = async(req, res) =>{
 
 
   export const Acart = async(req, res) =>{
-    console.log(req.params.id)
+
     const id = req.params.id
+    console.log(req.params.id)
   try{
-      const cart = await Cart.find({user_id: id}).exec();
+      const cart = await Cart.find({userId: id}).exec();
       if(!cart){
         return res.status(404).json({message:"no items in the cart"})
       
-      }else{
-        return res.status(200).json(cart)
       }
+        return res.status(200).json(cart)
+      
     }catch (error) {
       console.log(error);
       res.status(500).json({ success: false, message: "Server error" });

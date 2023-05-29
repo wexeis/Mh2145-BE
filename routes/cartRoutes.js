@@ -1,10 +1,10 @@
 import express from "express"
-import { AllCarts, addToCart, deleteACart, deleteAllCarts } from "../controllers/cartController.js";
+import { Acart, AllCarts, addToCart, deleteACart, deleteAllCarts } from "../controllers/cartController.js";
 
 const router = express.Router();
 
 router.get("/", AllCarts);
-router.get("/:id", AllCarts);
+router.get("/:id", Acart);
 
 
 router.post('/', addToCart)

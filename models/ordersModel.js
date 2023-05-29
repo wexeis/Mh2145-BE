@@ -55,9 +55,12 @@ const orderSchema = mongoose.Schema({
     type: String
   },
 
-  LastName: {
+  lastName: {
     type: String
   }, 
+  email: {
+    type: String
+  },
 totalBill:{
   type: Number
 }},

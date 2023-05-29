@@ -7,14 +7,17 @@ import User from "../models/usersModel.js";
 
 
 export const createAnOrder = async (req, res) => {
-const id = req.body.cartId
+  console.log("hello")
+const id = req.body.userId
+console.log("this is userId")
 console.log(id)
  try { 
-  const cart = await Cart.find({ _id: id }).exec();
+  const cart = await Cart.find({ userId: id }).exec();
   console.log(cart)
-  const userId = cart[0].userId
+  const userId = id
   console.log("hello" + userId)
   const user = await User.findById(userId).exec()
+  console.log(user)
 
   if(user.length == 0){
     res.status(400).json(`${userId } user is not found `)
@@ -26,14 +29,14 @@ console.log(id)
 
   let totalBill = 0;
   for (let i = 0; i < cart[0].products.length; i++) {
-    totalBill += cart[0].products[i].finalPrice;
+    totalBill += cart[0].products[i].finalPrice * cart[0].products[i].quantity;
   }
 
   const order = new Order({
     userId,
     shippingAddress: req.body.shippingAddress,
     phoneNumber: req.body.phoneNumber,
-    cartItems: cart[0]._id,
+    cartId: cart[0]._id,
     products: cart[0].products,
     totalBill,
     firstName: user.firstName,
@@ -41,7 +44,9 @@ console.log(id)
     email: user.email,
     status: "Pending"
   });
+
   console.log(order);
+  console.log(cart[0]._id)
 
 
   // Validate order object before saving to database
@@ -49,9 +54,9 @@ console.log(id)
   //   return res.status(400).json("Invalid order data");
   // }
 
-  await order.save();
+  // await order.save();
 
-  await Cart.deleteOne({ userId: userId }).exec();
+  // await Cart.deleteOne({ userId: userId }).exec();
 
   res.status(200).json(order);
 

@@ -12,6 +12,7 @@ import productRoutes from "./routes/productsRoutes.js"
 import categoryRoutes from "./routes/categoriesRoutes.js"
 import cartRoutes from "./routes/cartRoutes.js"
 import orderRoutes from "./routes/ordersRoutes.js"
+import contactUsRoutes from './routes/contactUs.js'
 
 
 
@@ -75,3 +76,4 @@ app.use("/product", productRoutes)
 app.use("/category", categoryRoutes)
 app.use("/cart", cartRoutes)
 app.use("/order", orderRoutes)
+app.use("/contactus",  contactUsRoutes);
